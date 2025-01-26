@@ -21,7 +21,6 @@ class PaperAnalyzer:
                 query=config['query'], 
                 paper_title=title
             )
-            print(contexts)
             # Format prompt with paper title
             formatted_prompt = self.templates.get_prompt(
                 'analysis',
@@ -31,7 +30,6 @@ class PaperAnalyzer:
                 fields=config['prompt'] 
             )
             
-            print(formatted_prompt)
             # Generate analysis
             messages = [{"role": "system", "content": formatted_prompt}]
             response = self.llm.invoke(messages)            

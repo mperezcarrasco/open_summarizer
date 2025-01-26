@@ -1,11 +1,11 @@
 from src.utils.utils import Config, FileHandler
-from src.analizer import AnalyzerFactory
+from src.factory import AnalyzerFactory
 
 import pandas as pd
 
 def main():
    papers = pd.read_csv('./data/papers/raw/geospatial_papers.csv')
-   papers = papers[(papers['downloaded']) & (papers['model_type']=="Generative")]
+   papers = papers[(papers['downloaded']) & (papers['model_type']=="Generative")][3:]
    config = Config("configs/config.yaml")
    analyzer = AnalyzerFactory.create_analyzer(config)
    for _, paper in papers.iterrows():
