@@ -1,0 +1,12 @@
+vectorstore:
+  model: "sentence-transformers/all-MiniLM-L6-v2"
+  device: "mps"
+
+llm:
+  model: "deepseek-r1:8b"
+  temperature: 0.1
+  seed: 42
+
+retriever:
+  max_results: 200
+  final_results: 5
