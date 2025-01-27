@@ -2,7 +2,10 @@
 A Python implementation to test DeepSeek-r1:8b capabilities by reproducing key components from the PaperQA2 paper (arXiv:2409.13740). This implementation focuses on local paper analysis using RAG (Retrieval-Augmented Generation) and RCS (Reranking and Contextual Summarization).
 
 **Note**
-This is a partial implementation focused on testing deepseek capabilities. Key differences from PaperQA2:
+
+This is a partial implementation focused on testing deepseek capabilities. 
+
+** Key differences from PaperQA2:**
 
 - No internet paper search (works only with uploaded PDFs)
 - No citation traversal
