@@ -16,7 +16,7 @@ class Retriever:
        Retrieve relevant chunks and rerank using RCS.
        """
        k = k or self.final_results
-       
+       """
        # Initial retrieval
        augmented_query = f"[{paper_title}] {query}"
        results = self.vector_store.db.max_marginal_relevance_search(
@@ -45,9 +45,54 @@ class Retriever:
            key=lambda x: float(x["relevance_score"]),
            reverse=True
        )
-       
        # Return top k summaries
        return [summary["summary"] for summary in ranked_summaries[:k]]
+       """
+       try:
+            # Initial retrieval
+            augmented_query = f"[{paper_title}] {query}"
+            results = self.vector_store.db.max_marginal_relevance_search(
+                augmented_query, 
+                k=self.max_results
+            )
+            
+            # Filter for target paper
+            filtered_results = [
+                doc for doc in results 
+                if paper_title == doc.metadata["title"]
+            ]
+
+            if not filtered_results:
+                logger.info(f"No results found for paper: {paper_title}")
+                return []
+            
+            reranked_results = self.rerank_with_crossencoder(query, filtered_results) if self.cross_encoder is not None \
+                else filtered_results
+            
+            # RCS Step
+            contextual_summaries = []
+            for doc in reranked_results:
+                summary = self.summarizer.summarize(query, doc.page_content)
+                if summary["summary"]:
+                    contextual_summaries.append(summary)
+            
+            if not contextual_summaries:
+                logger.info("No valid summaries generated")
+                return []
+
+            # Rank by relevance score
+            ranked_summaries = sorted(
+                contextual_summaries,
+                key=lambda x: float(x["relevance_score"]),
+                reverse=True
+            )
+            
+            # Return top k summaries
+            return [summary["summary"] for summary in ranked_summaries[:k]]
+       except Exception as e:
+            logger.error(f"Error in retrieve_and_rerank: {str(e)}")
+            return []
+   
    
    def get_metadata(self, paper_chunks: List[Dict]) -> Dict:
         """Get metadata from paper chunks."""

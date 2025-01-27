@@ -30,12 +30,7 @@ class RCSummarizer:
             return {
                 "summary": "",
                 "relevance_score": "0",
-                "metadata": {
-                    "cited_papers": [],
-                    "key_claims": [],
-                    "methods_used": []
                 }
-            }
 
     def _parse_json(self, content: str) -> Dict:
         try:
@@ -60,3 +55,5 @@ class RCSummarizer:
        for field in required_fields:
            if field not in summary:
                raise ValueError(f"Missing required field: {field}")
+       if field=="relevance_score":
+            float(summary["relevance_score"])

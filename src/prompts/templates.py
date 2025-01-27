@@ -44,7 +44,7 @@ Provide only the JSON object in your response.[/INST]"""
                 'rcs': """<|system|>
 You are an analytical research assistant.
 Summarize relevant details from the given excerpt to answer the question.
-Then, evaluate the relevance of your summary.
+Then, evaluate the relevance of your summary with an integer between 0 and 10.
 
 Provide the output as a JSON object with these fields:
 {{

@@ -19,7 +19,7 @@ class ResearchEmbeddingStore:
         self.papers_df = self.papers_df[self.papers_df['downloaded'] == True]
         self.embeddings = HuggingFaceEmbeddings(
             model_name="sentence-transformers/all-MiniLM-L6-v2",
-            model_kwargs={"device": "mps"}
+            model_kwargs={"device": "cuda"}
         )
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=1000,
