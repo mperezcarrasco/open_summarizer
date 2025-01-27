@@ -32,11 +32,9 @@ cd paper-summarizer
 pip install -r requirements.txt
 ```
 
-# Initialize vector store
-```
-python scripts/initialize_db.py
 Requirements
-Copylangchain
+```
+langchain
 langchain-community 
 langchain-ollama
 sentence-transformers
@@ -49,7 +47,7 @@ pyyaml
 Command Line
 ```
 # Analyze a single PDF
-python main.py --image path/to/paper.pdf --task analyze
+python main.py --path path/to/paper.pdf --title "title of the paper"
 ```
 
 **Python API**
@@ -86,7 +84,7 @@ src/
     └── pdf.py               # PDF processing
 ```
 
-**Contributing**
+# Contributing
 
 Fork the repository
 Create a feature branch (git checkout -b feature/amazing-feature)
