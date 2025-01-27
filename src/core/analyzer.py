@@ -1,8 +1,8 @@
 from typing import Dict, Optional, List
 import json
 import logging
-from ..prompts.configs import PAPER_ANALYSIS_ASPECTS
 
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class PaperAnalyzer:
@@ -10,12 +10,21 @@ class PaperAnalyzer:
         self.retriever = retriever
         self.llm = llm
         self.templates = prompt_templates
-        self.aspects = PAPER_ANALYSIS_ASPECTS
 
-    def analyze_paper(self, title: str) -> Dict:
-        analysis = {}
+    def analyze_paper(self, title: str, pdf_path: str = None) -> Dict:
+        if pdf_path:
+           temp_db = self.retriever.vector_store.create_temp_index(
+               pdf_path=pdf_path,
+               title=title,
+               metadata={
+                   "source": "user_upload",
+                   "analysis_type": "single_pdf"
+               }
+           )
+           self.retriever.vector_store.db = temp_db
         
-        for aspect, config in self.aspects.items():
+        analysis = {}
+        for aspect, config in self.templates.aspects.items():
             # Retrieve relevant chunks
             contexts = self.retriever.retrieve_and_rerank(
                 query=config['query'], 
