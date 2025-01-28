@@ -5,7 +5,7 @@ A Python implementation to test DeepSeek-r1:8b capabilities by reproducing key c
 
 This is a partial implementation focused on testing deepseek capabilities. 
 
-** Key differences from PaperQA2:**
+**Key differences from PaperQA2**:
 
 - No internet paper search (works only with uploaded PDFs)
 - No citation traversal
@@ -29,10 +29,25 @@ git clone https://github.com/yourusername/paper-summarizer.git
 cd paper-summarizer
 ```
 
+# Environment Setup
 
-# Install dependencies
+Option 1: Local Installation.
+
+We strongly recommend using a virtual environment. Set up a venv environment with:
+
 ```
+python3 -m venv hsr
+source hsr/bin/activate
 pip install -r requirements.txt
+```
+
+Option 2: Docker container.
+
+Alternatively, a docker image is contained in `Dockerfile`. For a containerized setup, use the provided Docker scripts:
+
+```
+bash build_container.sh
+bash run_container.sh
 ```
 
 Requirements
