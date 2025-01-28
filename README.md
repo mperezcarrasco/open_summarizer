@@ -61,8 +61,9 @@ pandas
 pyyaml
 ```
 
-**Usage**
-Command Line
+# Usage
+
+**Command Line**
 ```
 # Analyze a single PDF
 python main.py --path path/to/paper.pdf --title "title of the paper"
