@@ -71,10 +71,14 @@ python main.py --path path/to/paper.pdf --title "title of the paper"
 
 **Python API**
 ```
-from src.core.analyzer import PaperAnalyzer
+from src.factory import AnalyzerFactory
+from src.utils.utils import Config
+
+# Initialize config
+config = Config("configs/config.yaml")
 
 # Initialize analyzer
-analyzer = PaperAnalyzer(config)
+analyzer = AnalyzerFactory.create_analyzer(config)
 
 # Analyze paper
 results = analyzer.analyze_paper("paper_title", pdf_path="path/to/paper.pdf")
