@@ -25,7 +25,7 @@ This is a partial implementation focused on testing deepseek capabilities.
 # Installation
 ```
 # Clone the repository
-git clone https://github.com/yourusername/paper-summarizer.git
+git clone https://github.com/mperezcarrasco/open_summarizer.git
 cd paper-summarizer
 ```
 
