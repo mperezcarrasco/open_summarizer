@@ -90,17 +90,19 @@ print(f"Experiments: {results['experiments']}")
 src/
 ├── core/
 │   ├── analyzer.py           # Main analyzer implementation
-│   └── controller.py         # LLM controller
-├── knowledge/
-│   ├── base.py              # Base knowledge store
+├── embeddings/
 │   ├── vectorstore.py       # FAISS implementation
-│   └── prompts.py           # Prompt templates
-├── tools/
-│   ├── retriever.py         # Document retrieval
-│   └── summarizer.py        # RCS implementation
-└── utils/
-    ├── logger.py            # Logging utilities
-    └── pdf.py               # PDF processing
+├── retrieval/
+│   ├── retriever.py         # Main retriever based on RAG and Rerankers
+│   ├── summarizer.py        # RC Summarizer
+├── prompts/
+│   ├── templates.py           # Prompt templates
+│   └── configs.py             # Configure the information to extract from pdfs
+├── utils/
+│   ├── utils.py                # Logging utilities
+│   └── pdf_preprocessor.py     # PDF processing
+└ factory.py                    # Create artifacts.
+main.py       # Main implementation.
 ```
 
 # Contributing
